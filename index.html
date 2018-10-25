@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+	<style>
+	*{
+		margin: 0;
+		padding: 0;
+	}
+		#block{
+			width: 100vw;
+			height: 100vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+		}
+		#field{
+			display: flex;
+			flex-direction: column;
+		}
+		.line{
+			display: flex;
+		}
+		.row{
+			width: 50px;
+			height: 50px;
+			border: 1px solid black;
+			cursor: pointer;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 25px;
+			font-weight: bold;
+		}
+		.row:hover{
+			background: #f7f7f7;
+		}
+		#buttons{
+			margin-top: 30px;
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+			align-items: center;
+		}
+		#repeat{
+			margin-left:10px;
+			padding: 5px 10px;
+			border-radius:10px;
+			outline: none;
+			border: 1px solid #ea533f;
+			background: none;
+			cursor: pointer;
+			font-size: 15px;
+			color: #ea533f;
+		}
+		#start{
+			margin-right:10px;
+			padding: 5px 10px;
+			border-radius:10px;
+			outline: none;
+			border: 1px solid #ea533f;
+			background: none;
+			cursor: pointer;
+			font-size: 15px;
+			color: #ea533f;
+		}
+		#start:hover,#repeat:hover{
+			background: #ea533f;
+			color:#f7f7f7;
+			transition: 0.3s ease-out;
+		}
+	</style>
+</head>
+<body>
+	<div id="block">
+		<div id="field">
+			<div class="line">
+				<div class="row" data-check="false" data-x="0" data-y="0" data-num="0"></div>
+				<div class="row" data-check="false" data-x="0" data-y="1" data-num="1"></div>
+				<div class="row" data-check="false" data-x="0" data-y="2" data-num="2"></div>
+			</div>
+			<div class="line">
+				<div class="row" data-check="false" data-x="1" data-y="0" data-num="3"></div>
+				<div class="row" data-check="false" data-x="1" data-y="1" data-num="4"></div>
+				<div class="row" data-check="false" data-x="1" data-y="2" data-num="5"></div>
+			</div>
+			<div class="line">
+				<div class="row" data-check="false" data-x="2" data-y="0" data-num="6"></div>
+				<div class="row" data-check="false" data-x="2" data-y="1" data-num="7"></div>
+				<div class="row" data-check="false" data-x="2" data-y="2" data-num="8"></div>
+			</div>
+		</div>
+		<div id="buttons">
+			<div id="div"><button onclick="start()" id="start">Начать</button>
+			<button onclick="repeat()" id="repeat">Заново</button>
+		</div>
+		<h1></h1>
+		</div>
+	</div>
+
+	<script>
+		 function start() {
+			 field = [[],
+			 		  [], 
+			 		  []
+			 		  ];
+			 count = 0;
+			 win_check = false;
+
+			$(".row").on("click",function(){
+				if((count % 2 == 0) && ($(this).attr("data-check") == "false")){
+					$(this).html("X");
+					$(this).attr("data-check","true");
+					count++;
+					field[$(this).attr("data-x")][$(this).attr("data-y")] = 1;
+
+				}
+				if ((count % 2 !== 0) && ($(this).attr("data-check") == "false"))
+				{
+					$(this).html("O");
+					$(this).attr("data-check","true");
+					count++;
+					field[$(this).attr("data-x")][$(this).attr("data-y")] = 0;
+				}
+				//Проверка строчек
+				if (field[0].length == 3){
+					if((field[0][0] == field[0][1]) && (field[0][0] == field[0][2])){
+						 if (count % 2 ==0){
+						$("h1").html("Выиграли нолики");
+						$(".row").off();
+						win_check = true;
+					
+					}else{
+						$("h1").html("Выиграли крестики");
+						$(".row").off();
+						win_check = true;
+					}
+					}
+				}
+				if (field[1].length == 3){
+					if((field[1][0] == field[1][1]) && (field[1][0] == field[1][2])){
+					 if (count % 2 ==0){
+						 $("h1").html("Выиграли нолики");
+						 $(".row").off();
+						 win_check = true;
+					
+					}else{
+						$("h1").html("Выиграли крестики");
+						$(".row").off();
+						win_check = true;
+					}
+					}
+				}
+				if (field[2].length == 3){
+					if((field[2][0] == field[2][1]) && (field[2][0] == field[2][2])){
+						if (count % 2 ==0){
+						$("h1").html("Выиграли нолики");
+						$(".row").off();
+						win_check = true;
+					}else{
+						$("h1").html("Выиграли крестики");
+						$(".row").off();
+						win_check = true;
+					}
+					}
+				}
+				//Проверка столбиков
+				if ((((field[0][0] !== undefined) && (field[1][0] !== undefined)) && (field[2][0] !== undefined)) && ((field[0][0] == field[1][0]) && (field[2][0] == field[1][0]))){
+					 if (count % 2 ==0){
+						 $("h1").html("Выиграли нолики");
+						 $(".row").off();
+						 win_check = true;
+					
+					}else{
+						$("h1").html("Выиграли крестики");
+						$(".row").off();
+						win_check = true;
+					}
+				}
+				if ((((field[0][1] !== undefined) && (field[1][1] !== undefined)) && (field[2][1] !== undefined)) && ((field[0][1] == field[1][1]) && (field[0][1] == field[2][1]))){
+					 if (count % 2 ==0){
+						 $("h1").html("Выиграли нолики");
+						 $(".row").off();
+						 win_check = true;
+					
+					}else{
+						$("h1").html("Выиграли крестики");
+						$(".row").off();
+						win_check = true;
+					}
+				}
+				
+				if ((((field[0][2] !== undefined) && (field[1][2] !== undefined)) && (field[2][2] !== undefined)) && ((field[0][2] == field[1][2]) && (field[2][2] == field[0][2]))){
+					 if (count % 2 ==0){
+						 $("h1").html("Выиграли нолики");
+						 $(".row").off();
+						 win_check = true;
+					
+					}else{
+						$("h1").html("Выиграли крестики");
+						$(".row").off();
+						win_check = true;
+					}
+				}
+				//проверка диагоналей
+				if ((((field[0][0] !== undefined) && (field[1][1] !== undefined)) && (field[2][2] !== undefined)) && ((field[0][0] == field[1][1])) && (field[2][2] == field[0][0])){
+					 if (count % 2 ==0){
+						 $("h1").html("Выиграли нолики");
+						 $(".row").off();
+						 win_check = true;
+					
+					}else{
+						$("h1").html("Выиграли крестики");
+						$(".row").off();
+						win_check = true;
+					}
+				}
+				if ((((field[0][2] !== undefined) && (field[1][1] !== undefined)) && (field[2][0] !== undefined)) && ((field[0][2] == field[1][1])) && (field[2][0] == field[0][2])){
+					 if (count % 2 ==0){
+						 $("h1").html("Выиграли нолики");
+						 $(".row").off();
+						 win_check = true;
+					
+					}else{
+						$("h1").html("Выиграли крестики");
+						$(".row").off();
+						win_check = true;
+					}
+				}
+				//Проверка на ничью
+				if ((count == 8) && (win_check == false)){
+					$("h1").html("Ничья");
+						$(".row").off();	
+				}
+
+			});
+			
+		}
+		function repeat() {
+			for (var i = 0;i<9;i++){
+				$(".row").attr("data-num",i).html("");
+				$(".row").attr("data-num",i).attr("data-check","false");
+				console.log($(".row").attr("data-num",i).attr("data-check"));
+			}
+			$("h1").html("");
+			 start();
+		}
+	</script>
+</body>
+</html>
