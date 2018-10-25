@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Tic-Tac-Toe</title>
+	<link rel="stylesheet" href="main.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+	<script src="script.js"></script>	
+</head>
+<body>
+	<div id="block">
+		<div id="field">
+			<div class="line">
+				<div class="row" data-check="false" data-x="0" data-y="0" data-num="0"></div>
+				<div class="row" data-check="false" data-x="0" data-y="1" data-num="1"></div>
+				<div class="row" data-check="false" data-x="0" data-y="2" data-num="2"></div>
+			</div>
+			<div class="line">
+				<div class="row" data-check="false" data-x="1" data-y="0" data-num="3"></div>
+				<div class="row" data-check="false" data-x="1" data-y="1" data-num="4"></div>
+				<div class="row" data-check="false" data-x="1" data-y="2" data-num="5"></div>
+			</div>
+			<div class="line">
+				<div class="row" data-check="false" data-x="2" data-y="0" data-num="6"></div>
+				<div class="row" data-check="false" data-x="2" data-y="1" data-num="7"></div>
+				<div class="row" data-check="false" data-x="2" data-y="2" data-num="8"></div>
+			</div>
+		</div>
+		<div id="buttons">
+			<div id="div"><button onclick="start()" id="start">Начать</button>
+			<button onclick="repeat()" id="repeat">Заново</button>
+		</div>
+		<h1></h1>
+		<p>Игра началась!</p>
+		</div>
+	</div>
+</body>
+</html>
