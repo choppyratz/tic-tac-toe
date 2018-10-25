@@ -1,8 +1,5 @@
  function start() {
-			 field = [[],
-			 		  [], 
-			 		  []
-			 		  ];
+			 field = [[], [], []];
 			 count = 0;
 			 win_check = false;
 			 $("p").fadeIn("fast");
@@ -128,7 +125,7 @@
 					}
 				}
 				//Проверка на ничью
-				if ((count == 8) && (win_check == false)){
+				if ((count == 9) && (win_check == false)){
 					$("h1").html("Ничья");
 						$(".row").off();	
 				}
